@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'story_interaction_screen.dart';
+import '../../app_colors.dart';
 
 class ChildHomeScreen extends StatelessWidget {
   const ChildHomeScreen({super.key});
 
-  // 1. La méthode _buildSidebar est maintenant correctement placée DANS la classe, 
-  // mais À L'EXTÉRIEUR de la méthode build principale.
-  // On lui passe le "BuildContext" pour que la navigation (bouton quitter) fonctionne.
   Widget _buildSidebar(BuildContext context) {
     return Drawer(
-      backgroundColor: const Color(0xFFFFFBEB),
+      backgroundColor: AppColors.background,
       child: SafeArea(
         child: Column(
           children: [
@@ -20,7 +18,7 @@ class ChildHomeScreen extends StatelessWidget {
                 children: [
                   const Text('👦🏻', style: TextStyle(fontSize: 48)),
                   const SizedBox(width: 16),
-                  Text('يوسف', style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.bold, color: const Color(0xFFB45309))),
+                  Text('يوسف', style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.textAccent)),
                 ],
               ),
             ),
@@ -28,7 +26,7 @@ class ChildHomeScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 32),
               title: Text('إنجازاتي (Mes succès)', style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold)),
-              onTap: () {}, // Ajouter la navigation plus tard
+              onTap: () {},
             ),
             ListTile(
               leading: const Icon(Icons.settings_rounded, color: Colors.grey, size: 32),
@@ -36,12 +34,10 @@ class ChildHomeScreen extends StatelessWidget {
               onTap: () {},
             ),
             const Spacer(),
-            // Bouton pour quitter l'espace enfant
             ListTile(
               leading: const Icon(Icons.exit_to_app_rounded, color: Colors.red, size: 32),
               title: Text('خروج (Quitter)', style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
               onTap: () {
-                // Retour au portail principal de sélection
                 Navigator.popUntil(context, (route) => route.isFirst);
               },
             ),
@@ -55,18 +51,14 @@ class ChildHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBEB), // amber-50 (Couleur chaude et joyeuse)
-      
-      // 2. On attache le menu latéral au Scaffold ici :
-      drawer: _buildSidebar(context), 
-      
+      backgroundColor: AppColors.background,
+      drawer: _buildSidebar(context),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         toolbarHeight: 80,
         title: Row(
           children: [
-            // Avatar de l'enfant
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
@@ -83,10 +75,9 @@ class ChildHomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'مرحباً يا بطل!', // "Bonjour le héros !"
-                  style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.w900, color: const Color(0xFFB45309)),
+                  'مرحباً يا بطل!',
+                  style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.textAccent),
                 ),
-                // Petites étoiles de récompense
                 Row(
                   children: const [
                     Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 20),
@@ -105,7 +96,6 @@ class ChildHomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             const SizedBox(height: 20),
-            // Grosse carte d'action principale
             GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -116,14 +106,14 @@ class ChildHomeScreen extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(32),
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFFF59E0B), Color(0xFFD97706)], // Dégradé Orange
+                  gradient: LinearGradient(
+                    colors: [AppColors.iconAccent, AppColors.gradientEnd],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
                   borderRadius: BorderRadius.circular(40),
                   boxShadow: [
-                    BoxShadow(color: const Color(0xFFF59E0B).withOpacity(0.4), blurRadius: 20, offset: const Offset(0, 10)),
+                    BoxShadow(color: AppColors.iconAccent.withOpacity(0.4), blurRadius: 20, offset: const Offset(0, 10)),
                   ],
                 ),
                 child: Column(
@@ -131,22 +121,19 @@ class ChildHomeScreen extends StatelessWidget {
                     const Icon(Icons.auto_stories_rounded, color: Colors.white, size: 80),
                     const SizedBox(height: 16),
                     Text(
-                      'ابدأ مغامرة جديدة!', // "Commence une nouvelle aventure !"
+                      'ابدأ مغامرة جديدة!',
                       style: GoogleFonts.cairo(fontSize: 28, fontWeight: FontWeight.w900, color: Colors.white),
                     ),
                   ],
                 ),
               ),
             ),
-            
             const SizedBox(height: 48),
             Text(
-              'أصدقاؤك بانتظارك', // "Tes amis t'attendent"
+              'أصدقاؤك بانتظارك',
               style: GoogleFonts.cairo(fontSize: 22, fontWeight: FontWeight.w800, color: const Color(0xFF78350F)),
             ),
             const SizedBox(height: 16),
-            
-            // Liste horizontale de personnages
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
@@ -165,7 +152,6 @@ class ChildHomeScreen extends StatelessWidget {
     );
   }
 
-  // 3. Cette méthode auxiliaire est également bien placée (dans la classe, hors du build).
   Widget _buildCharacterCard(String emoji, String name, Color color) {
     return Container(
       width: 100,

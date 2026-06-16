@@ -40,7 +40,7 @@ class ParentHomeScreen extends StatelessWidget {
               
               // Titre Principal
               Text(
-                'Mate.ai',
+                'Qissaty ',
                 style: GoogleFonts.cairo(
                   fontSize: 56,
                   fontWeight: FontWeight.w900,

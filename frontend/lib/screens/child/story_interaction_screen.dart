@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import '../../services/auth_service.dart';
+import '../../app_colors.dart';
 
 class StoryInteractionScreen extends StatefulWidget {
   const StoryInteractionScreen({super.key});
@@ -131,12 +132,12 @@ class _StoryInteractionScreenState extends State<StoryInteractionScreen> with Si
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBEB),
+      backgroundColor: AppColors.background,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_rounded, color: Color(0xFFB45309)),
+          icon: Icon(Icons.arrow_back_ios_rounded, color: AppColors.textAccent),
           onPressed: () async {
             await _stopAndSaveRecording();
             if (mounted) Navigator.pop(context);
@@ -144,7 +145,7 @@ class _StoryInteractionScreenState extends State<StoryInteractionScreen> with Si
         ),
         title: Text(
           'مغَامرتِي المَباشِرة',
-          style: GoogleFonts.cairo(color: const Color(0xFFB45309), fontWeight: FontWeight.bold),
+          style: GoogleFonts.cairo(color: AppColors.textAccent, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -162,7 +163,7 @@ class _StoryInteractionScreenState extends State<StoryInteractionScreen> with Si
               ),
               child: SingleChildScrollView(
                 child: Text(
-                  "كَان يَا مَكان، فِي غَابَةٍ سِحْرِيَّةٍ بَعِيدَةٍ، كَان هُنَاكَ ثَعْلَبٌ صَغِيرٌ يَعِيشُ بَيْنَ الأَشْجَارِ...",
+                  "كَان يَا مَكان، فِي غَابَةٍ سِحْرِيَّةٍ بَعِيدَةٍ، كَان هُنَاكَ ثَعْلَبٌ صَغِيرٌ يَعِيشُ بَيْنَ الأَشْجَارِ...",
                   style: GoogleFonts.cairo(fontSize: 26, height: 1.8, fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                   textDirection: TextDirection.rtl,
@@ -178,7 +179,7 @@ class _StoryInteractionScreenState extends State<StoryInteractionScreen> with Si
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  _isRecording ? "🎙️ أَنَا أَسْتَمِعُ إِلَيْك الآن..." : "🎙️ تَمَّ حِفْظُ الصَّوْت",
+                  _isRecording ? "🎙️ أَنَا أَسْتَمِعُ إِلَيْك الآن..." : "🎙️ تَمَّ حِفْظُ الصَّوْت",
                   style: GoogleFonts.cairo(
                     fontSize: 20, 
                     color: _isRecording ? Colors.red : Colors.green, 
