@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../components/primary_button.dart';
 import '../../components/input_text.dart';
-import 'parent_dashboard_screen.dart';
 import 'parent_main_screen.dart';
+
+// 1. IMPORT DE NOTRE COMPOSANT APP BAR
+import '../../components/custom_app_bar.dart';
 
 class ChildProfileSetupScreen extends StatefulWidget {
   const ChildProfileSetupScreen({super.key});
@@ -22,19 +25,16 @@ class _ChildProfileSetupScreenState extends State<ChildProfileSetupScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          'ملف الطفل',
-          style: GoogleFonts.cairo(
-            color: const Color(0xFF1E1B4B),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false, // Pas de retour en arrière possible ici
+      
+      // 2. UTILISATION DE NOTRE CUSTOM APP BAR
+      // On masque la flèche de retour car on ne veut pas que le parent retourne à la page d'inscription
+      appBar: const CustomAppBar(
+        title: 'ملف الطفل',
+        showBackButton: false,
       ),
+      
+      // Pas de drawer ici car la configuration n'est pas encore terminée
+      
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(32.0),
         child: Column(

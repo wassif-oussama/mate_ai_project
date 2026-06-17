@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-// Vérifie que cet import est bien présent
 import 'screens/auth/role_selection_screen.dart'; 
+
 
 void main() {
   runApp(const MateAiApp());
@@ -31,7 +31,6 @@ class MateAiApp extends StatelessWidget {
         ),
       ),
       
-      // VÉRIFIE CETTE LIGNE : Elle doit être exactement comme ça
       home: const RoleSelectionScreen(), 
     );
   }

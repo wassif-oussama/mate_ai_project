@@ -5,6 +5,10 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:http/http.dart' as http;
 import '../../services/auth_service.dart';
 
+// 1. IMPORT DE NOS COMPOSANTS DRY
+import '../../components/custom_app_bar.dart';
+import '../../components/custom_sidebar.dart';
+
 class ParentDashboardScreen extends StatefulWidget {
   const ParentDashboardScreen({super.key});
 
@@ -52,13 +56,17 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF1E1B4B),
-        title: Text(
-          'لوحة تحكم أداء الطفل',
-          style: GoogleFonts.cairo(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
+      
+      // 2. AJOUT DU MENU LATÉRAL
+      drawer: const CustomSidebar(userRole: 'Parent'),
+      
+      // 3. UTILISATION DE NOTRE CUSTOM APP BAR
+      appBar: const CustomAppBar(
+        title: 'لوحة تحكم أداء الطفل', // "Tableau de bord de l'enfant"
+        showBackButton: true, // Permet de revenir à l'écran précédent
       ),
+      
+      // LE CORPS RESTE INTACT
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -186,6 +194,4 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
       ),
     );
   }
-  
-  
 }

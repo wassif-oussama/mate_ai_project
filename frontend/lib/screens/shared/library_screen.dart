@@ -5,6 +5,9 @@ import 'package:http/http.dart' as http;
 import '../../services/auth_service.dart';
 import '../child/story_interaction_screen.dart';
 
+// 1. IMPORT DE NOTRE COMPOSANT APP BAR
+import '../../components/custom_app_bar.dart';
+
 class LibraryScreen extends StatefulWidget {
   const LibraryScreen({super.key});
 
@@ -40,13 +43,13 @@ class _LibraryScreenState extends State<LibraryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF1E1B4B),
-        title: Text(
-          'خزانة القصص', // "Bibliothèque des histoires"
-          style: GoogleFonts.cairo(color: Colors.white, fontWeight: FontWeight.bold),
-        ),
+      
+      // 2. UTILISATION DE NOTRE CUSTOM APP BAR
+      appBar: const CustomAppBar(
+        title: 'خزانة القصص', // "Bibliothèque des histoires"
+        showBackButton: true, // Affiche la flèche de retour
       ),
+      
       body: FutureBuilder<List<dynamic>>(
         future: _fetchStories(),
         builder: (context, snapshot) {

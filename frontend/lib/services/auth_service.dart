@@ -6,7 +6,8 @@ class AuthService {
   // Remplace par l'IP de ton PC si tu testes sur un vrai téléphone Android (ex: 192.168.1.X)
   // 10.0.2.2 est l'adresse magique pour l'émulateur Android vers localhost
   // 127.0.0.1 fonctionne pour Chrome ou l'application Windows locale
-  static const String baseUrl = 'http://127.0.0.1:8000/api'; 
+  static const String baseUrl = 'http://100.91.178.92:8000/api'; 
+  // static const String baseUrl = 'http://127.0.0.1:8000/api';
   final storage = const FlutterSecureStorage();
 
   // 1. Inscription

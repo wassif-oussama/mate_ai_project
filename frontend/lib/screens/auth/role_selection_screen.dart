@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'parent_home_screen.dart';
-import '../child/child_home_screen.dart';
+
+// Imports vers les écrans suivants
+import 'parent_home_screen.dart'; // Écran de bienvenue/pré-connexion Parent
+import '../child/child_profile_selection_screen.dart'; // Écran "Qui lit aujourd'hui ?" Enfant
 
 class RoleSelectionScreen extends StatelessWidget {
   const RoleSelectionScreen({super.key});
@@ -10,6 +12,9 @@ class RoleSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
+      
+      // Pas de CustomAppBar ni de CustomSidebar ici, c'est la page d'accueil pure !
+      
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -54,7 +59,7 @@ class RoleSelectionScreen extends StatelessWidget {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const ChildHomeScreen()),
+                    MaterialPageRoute(builder: (context) => const ChildProfileSelectionScreen()),
                   );
                 },
               ),
@@ -82,7 +87,7 @@ class RoleSelectionScreen extends StatelessWidget {
     );
   }
 
-  // Composant réutilisable pour les cartes de sélection
+  // Composant interne réutilisable pour les cartes de sélection
   Widget _buildRoleCard(BuildContext context, {
     required String title,
     required String subtitle,

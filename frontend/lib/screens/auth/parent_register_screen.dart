@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../../components/primary_button.dart';
 import '../../components/input_text.dart';
-// On importe l'écran suivant pour la navigation
+import '../../components/custom_app_bar.dart'; // Notre nouveau composant !
+
 import '../parent/child_profile_setup_screen.dart';
+import 'parent_login_screen.dart'; // Import nécessaire pour la redirection
 
 class ParentRegisterScreen extends StatelessWidget {
   const ParentRegisterScreen({super.key});
@@ -12,14 +15,13 @@ class ParentRegisterScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Color(0xFF1E1B4B)),
-          onPressed: () => Navigator.pop(context),
-        ),
+      
+      // 1. REMPLACEMENT PAR NOTRE CUSTOM APP BAR
+      appBar: const CustomAppBar(
+        title: '', // Titre vide pour un rendu épuré
+        showBackButton: true,
       ),
+      
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16.0),
@@ -92,7 +94,13 @@ class ParentRegisterScreen extends StatelessWidget {
               // Lien vers la connexion si déjà un compte
               Center(
                 child: GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () {
+                    // 2. CORRECTION DE LA NAVIGATION : On l'envoie directement au Login !
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const ParentLoginScreen()),
+                    );
+                  },
                   child: RichText(
                     text: TextSpan(
                       text: 'لديك حساب بالفعل؟ ',

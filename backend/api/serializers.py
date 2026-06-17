@@ -24,7 +24,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 class ChildSerializer(serializers.ModelSerializer):
     class Meta:
         model = Child
-        fields = ['id', 'first_name', 'age', 'avatar_emoji', 'created_at']
+        fields = ['id', 'first_name', 'age', 'avatar_emoji', 'pin_code']
 
 class ParentSerializer(serializers.ModelSerializer):
     # Permet d'inclure la liste des enfants directement quand on récupère le profil du parent

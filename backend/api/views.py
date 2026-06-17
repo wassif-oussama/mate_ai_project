@@ -1,6 +1,7 @@
 from datetime import date
 from rest_framework import viewsets
 from .models import Parent, Child, ActivitySession
+from rest_framework.permissions import IsAuthenticated
 from .serializers import ParentSerializer, ChildSerializer, ActivitySessionSerializer
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
@@ -26,9 +27,12 @@ class ParentViewSet(viewsets.ModelViewSet):
     serializer_class = ParentSerializer
 
 class ChildViewSet(viewsets.ModelViewSet):
-    queryset = Child.objects.all()
-    permission_classes = [AllowAny]
     serializer_class = ChildSerializer
+    permission_classes = [IsAuthenticated] # Exige un Token valide
+
+    def get_queryset(self):
+        # Retourne UNIQUEMENT les enfants du parent actuellement connecté !
+        return Child.objects.filter(parent=self.request.user)
 
 class ActivitySessionViewSet(viewsets.ModelViewSet):
     queryset = ActivitySession.objects.all()

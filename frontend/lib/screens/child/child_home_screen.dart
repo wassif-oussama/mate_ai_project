@@ -1,104 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+// Tes imports
 import 'story_interaction_screen.dart';
+
+// NOS COMPOSANTS DRY
+import '../../components/custom_app_bar.dart';
+import '../../components/custom_sidebar.dart';
 
 class ChildHomeScreen extends StatelessWidget {
   const ChildHomeScreen({super.key});
 
-  // 1. La méthode _buildSidebar est maintenant correctement placée DANS la classe, 
-  // mais À L'EXTÉRIEUR de la méthode build principale.
-  // On lui passe le "BuildContext" pour que la navigation (bouton quitter) fonctionne.
-  Widget _buildSidebar(BuildContext context) {
-    return Drawer(
-      backgroundColor: const Color(0xFFFFFBEB),
-      child: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Row(
-                children: [
-                  const Text('👦🏻', style: TextStyle(fontSize: 48)),
-                  const SizedBox(width: 16),
-                  Text('يوسف', style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.bold, color: const Color(0xFFB45309))),
-                ],
-              ),
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 32),
-              title: Text('إنجازاتي (Mes succès)', style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold)),
-              onTap: () {}, // Ajouter la navigation plus tard
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings_rounded, color: Colors.grey, size: 32),
-              title: Text('الإعدادات (Paramètres)', style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold)),
-              onTap: () {},
-            ),
-            const Spacer(),
-            // Bouton pour quitter l'espace enfant
-            ListTile(
-              leading: const Icon(Icons.exit_to_app_rounded, color: Colors.red, size: 32),
-              title: Text('خروج (Quitter)', style: GoogleFonts.cairo(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.red)),
-              onTap: () {
-                // Retour au portail principal de sélection
-                Navigator.popUntil(context, (route) => route.isFirst);
-              },
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFBEB), // amber-50 (Couleur chaude et joyeuse)
+      backgroundColor: const Color(0xFFFFFBEB), // amber-50 (Couleur chaude و joyeuse)
       
-      // 2. On attache le menu latéral au Scaffold ici :
-      drawer: _buildSidebar(context), 
+      // 1. APPEL DE NOTRE MENU LATÉRAL GÉNÉRIQUE EN MODE ENFANT
+      drawer: const CustomSidebar(userRole: 'Enfant'), 
       
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        toolbarHeight: 80,
-        title: Row(
-          children: [
-            // Avatar de l'enfant
-            Container(
-              padding: const EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(color: Colors.orange.withOpacity(0.2), blurRadius: 10, spreadRadius: 2),
-                ],
-              ),
-              child: const Text('👦🏻', style: TextStyle(fontSize: 32)),
-            ),
-            const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'مرحباً يا بطل!', // "Bonjour le héros !"
-                  style: GoogleFonts.cairo(fontSize: 24, fontWeight: FontWeight.w900, color: const Color(0xFFB45309)),
-                ),
-                // Petites étoiles de récompense
-                Row(
-                  children: const [
-                    Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 20),
-                    Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 20),
-                    Icon(Icons.star_rounded, color: Color(0xFFF59E0B), size: 20),
-                  ],
-                )
-              ],
-            ),
-          ],
-        ),
+      // 2. APPEL DE NOTRE APPBAR PERSONNALISÉE (Sans flèche de retour, pour afficher le menu ☰)
+      appBar: const CustomAppBar(
+        title: 'مرحباً يا بطل!', // "Bonjour le héros !"
+        showBackButton: false,
       ),
+      
+      // 3. LE CORPS DE TA PAGE RESTE INTACT
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
@@ -165,7 +92,7 @@ class ChildHomeScreen extends StatelessWidget {
     );
   }
 
-  // 3. Cette méthode auxiliaire est également bien placée (dans la classe, hors du build).
+  // Méthode auxiliaire conservée pour dessiner les cartes d'animaux
   Widget _buildCharacterCard(String emoji, String name, Color color) {
     return Container(
       width: 100,

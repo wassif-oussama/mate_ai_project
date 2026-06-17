@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../../components/custom_app_bar.dart';
 import '../../components/primary_button.dart';
-import 'package:google_fonts/google_fonts.dart'; 
-// Ajout de l'import pour que l'écran de connexion soit reconnu
-import 'parent_login_screen.dart'; 
+import 'parent_login_screen.dart';
 import 'parent_register_screen.dart';
-import '../parent/parent_main_screen.dart';
 
 class ParentHomeScreen extends StatelessWidget {
   const ParentHomeScreen({super.key});
@@ -13,6 +13,15 @@ class ParentHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC), // slate-50
+      
+      // 1. APPBAR : Juste la flèche pour revenir au choix Enfant/Parent. Pas de titre nécessaire ici.
+      appBar: const CustomAppBar(
+        title: '', 
+        showBackButton: true,
+      ),
+      
+      // 2. ATTENTION : Pas de `drawer` ici car l'utilisateur n'est pas encore connecté !
+
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -62,7 +71,7 @@ class ParentHomeScreen extends StatelessWidget {
               ),
               const SizedBox(height: 64),
 
-              // Boutons de navigation (Erreur corrigée ici)
+              // Boutons de navigation
               PrimaryButton(
                 title: 'تسجيل الدخول',
                 icon: Icons.login_rounded,

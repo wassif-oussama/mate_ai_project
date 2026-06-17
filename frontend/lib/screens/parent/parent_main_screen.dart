@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'parent_dashboard_screen.dart';
-import 'library_screen.dart';
+// Correction du chemin : la bibliothèque est dans le dossier 'shared'
+import '../shared/library_screen.dart'; 
 
 class ParentMainScreen extends StatefulWidget {
   const ParentMainScreen({super.key});
@@ -22,6 +24,7 @@ class _ParentMainScreenState extends State<ParentMainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // L'IndexedStack affiche la page sans la recharger à chaque clic
       body: IndexedStack(
         index: _currentIndex,
         children: _pages,
@@ -52,11 +55,11 @@ class _ParentMainScreenState extends State<ParentMainScreen> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.dashboard_rounded, size: 28),
-              label: 'لوحة التحكم',
+              label: 'لوحة التحكم', // "Tableau de bord"
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.menu_book_rounded, size: 28),
-              label: 'المكتبة',
+              label: 'المكتبة', // "Bibliothèque"
             ),
           ],
         ),

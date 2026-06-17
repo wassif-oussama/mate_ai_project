@@ -7,7 +7,7 @@ from .views import ParentViewSet, ChildViewSet, ActivitySessionViewSet, Register
 
 router = DefaultRouter()
 router.register(r'parents', ParentViewSet)
-router.register(r'children', ChildViewSet)
+router.register(r'children', ChildViewSet, basename='child')
 router.register(r'activities', ActivitySessionViewSet)
 router.register(r'stories', StoryViewSet)
 
@@ -19,7 +19,7 @@ urlpatterns = [
     path('auth/login/', TokenObtainPairView.as_view(), name='login'),
     
     # Route Espace Enfant (Envoi Audio Temps Réel)
-    path('conversation/turn/', ConversationTurnView.as_view(), name='conversation_turn'), # <-- NOUVELLE ROUTE
+    path('conversation/turn/', ConversationTurnView.as_view(), name='conversation_turn'), 
     
     path('', include(router.urls)),
 ]

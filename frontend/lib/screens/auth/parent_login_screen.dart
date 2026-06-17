@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import '../parent/parent_main_screen.dart';
 // IMPORTANT : N'oublie pas de vérifier que le chemin vers auth_service correspond bien à ton dossier
 import '../../services/auth_service.dart'; 
+// IMPORT DE NOTRE COMPOSANT CUSTOM
+import '../../components/custom_app_bar.dart';
 
 class ParentLoginScreen extends StatefulWidget {
   const ParentLoginScreen({super.key});
@@ -40,6 +42,7 @@ class _ParentLoginScreenState extends State<ParentLoginScreen> {
     // 4. Si c'est un succès, on va vers le Dashboard. Sinon, on affiche une erreur.
     if (success) {
       if (!mounted) return;
+      // Note: pushReplacement est parfait ici pour écraser la page de login
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const ParentMainScreen()),
@@ -66,11 +69,16 @@ class _ParentLoginScreenState extends State<ParentLoginScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black87),
+      
+      // 1. UTILISATION DE NOTRE CUSTOM APP BAR
+      // On laisse le titre vide pour garder le design épuré de ta page de connexion
+      appBar: const CustomAppBar(
+        title: '', 
+        showBackButton: true,
       ),
+      
+      // ATTENTION: Pas de drawer ici !
+      
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(24.0),
