@@ -24,7 +24,7 @@ class RoleSelectionScreen extends StatelessWidget {
               const SizedBox(height: 24),
               
               Text(
-                'مرحباً بك في Mate.ai', // Bienvenue dans Mate.ai
+                'مرحباً بك في Qissaty ', // Bienvenue dans Qissaty 
                 textAlign: TextAlign.center,
                 style: GoogleFonts.cairo(
                   fontSize: 36,

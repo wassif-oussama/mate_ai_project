@@ -13,7 +13,7 @@ class MateAiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Mate.ai',
+      title: 'Qissaty ',
       debugShowCheckedModeBanner: false, 
       
       builder: (context, child) {

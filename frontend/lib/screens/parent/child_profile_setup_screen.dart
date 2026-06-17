@@ -4,6 +4,7 @@ import '../../components/primary_button.dart';
 import '../../components/input_text.dart';
 import 'parent_dashboard_screen.dart';
 import 'parent_main_screen.dart';
+import '../../app_state.dart';
 
 class ChildProfileSetupScreen extends StatefulWidget {
   const ChildProfileSetupScreen({super.key});
@@ -120,6 +121,13 @@ class _ChildProfileSetupScreenState extends State<ChildProfileSetupScreen> {
               title: 'بدء المغامرة!',
               icon: Icons.rocket_launch_rounded,
               onPressed: () {
+                if (selectedAvatarIndex == 0) {
+  AppState.childGender = 'boy';
+} else if (selectedAvatarIndex == 1) {
+  AppState.childGender = 'girl';
+} else {
+  AppState.childGender = 'neutral';
+}
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(builder: (context) => const ParentMainScreen()),
